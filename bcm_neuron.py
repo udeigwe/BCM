@@ -31,6 +31,13 @@ class BCMNeuron:
 
     def train(self, da_l, da_r, ds_l, ds_r, nl=0, nr=0, iterations=1000):
         # da = actual pattern; ds = spontaneous; n = non-lgn noise
+
+        ca = sum(self.ml * da_l[0]) + sum(self.mr * da_r[0])
+        cs = sum(self.ml * ds_l[0]) + sum(self.mr * ds_r[0])
+        cn = sum(self.ml * nl[0]) + sum(self.mr * nr[0])
+        CL = np.zeros((self.lgn_l,))
+        CR = np.zeros((self.lgn_r,))
+
         if (self.lgn_l != np.shape(da_l)[1]) or (self.lgn_r != np.shape(da_r)[1]):
             raise Exception('pattern size must equal weight (i.e lgn) size ')
         elif (self.lgn_l != np.shape(ds_l)[1]) or (self.lgn_r != np.shape(ds_r)[1]):
@@ -46,6 +53,17 @@ class BCMNeuron:
                 phi = c * (c - self.theta)
                 self.ml = self.ml + self.eta * phi * (da_l + ds_l + nl)  # update left weights
                 self.mr = self.mr + self.eta * phi * (da_r + ds_r + nr)  # update right weights
-                # We need to now update theta
+                #       We need to now update theta
                 ca_bar = (1 / self.tau) * quad(lambda s: ca * np.exp(-(t - s) / self.tau), -np.inf, t)
                 self.theta = (ca_bar ** self.p) / self.c0
+                #       Add responses to all orientation in the big matrix
+                CL = np.vstack((CL, np.sum((da_l + ds_l + nl)*self.ml, axis=1)))
+                CR = np.vstack((CL, np.sum((da_r + ds_r + nr) * self.mr, axis=1)))
+
+        CL = np.delete(CL, 0, axis=0)
+        CR = np.delete(CR, 0, axis=0)
+
+        return CL, CR,
+
+
+        # write code to return weights too, theta
