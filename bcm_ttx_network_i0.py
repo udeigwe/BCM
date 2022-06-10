@@ -232,6 +232,7 @@ class BCMNeuron:
         # print (col_r)
         x = list(range(0, self.iterations))
         x = self.dt * np.array(x)
+
         figure, axis = plt.subplots(self.lgn_l, 2)
 
         for k in range(col_l):
@@ -255,6 +256,7 @@ class BCMNeuron:
         (row_r, col_r) = np.shape(self.tuning_curve_r)
         x = list(range(0, self.iterations))
         x = self.dt * np.array(x)
+        plt.figure()
         figure, axis = plt.subplots(self.patterns, 2)
 
         for k in range(col_l):
@@ -315,6 +317,8 @@ wl, ws, th, tcl, tcr = neuron.train(da_l=pat, da_r=pat, \
                                     ds_l=0 * pat, ds_r=0 * pat, \
                                     ds_li=0 * pati, ds_ri=0 * pati)
 neuron.plot_weights()
+plt.figure()
 neuron.plot_responses()
+plt.figure()
 neuron.plot_2eyes()
 
