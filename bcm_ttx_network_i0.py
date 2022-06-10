@@ -247,7 +247,7 @@ class BCMNeuron:
             axis[k, 1].set_ylabel("Weight")
             axis[k, 1].set_title("Time vs Weight")
 
-        plt.legend()
+        # plt.legend()
         plt.show()
 
     def plot_responses(self):
@@ -271,7 +271,7 @@ class BCMNeuron:
             axis[k, 1].set_title("Time vs Response")
             axis[k, 1].set_ylim([-0.2, 3.2])
 
-        plt.legend()
+        # plt.legend()
         plt.show()
 
     def plot_2eyes(self):
@@ -290,7 +290,7 @@ class BCMNeuron:
         # plt.plot.xlim([0, eta*iterations])
         # axis[k].set_ylim([0, 2])
 
-        plt.legend()
+        # axis.legend()
         plt.show()
 
 
