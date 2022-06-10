@@ -224,6 +224,7 @@ class BCMNeuron:
     """
 
     def plot_weights(self):
+        plt.figure(0)
         (row_l, col_l) = np.shape(self.weights_l)
         # print(row_l)
         # print (col_l)
@@ -232,7 +233,6 @@ class BCMNeuron:
         # print (col_r)
         x = list(range(0, self.iterations))
         x = self.dt * np.array(x)
-
         figure, axis = plt.subplots(self.lgn_l, 2)
 
         for k in range(col_l):
@@ -240,7 +240,7 @@ class BCMNeuron:
             axis[k, 0].set_xlabel("Time")
             axis[k, 0].set_ylabel("Weight")
             axis[k, 0].set_title("Time vs Weight")
-            axis[k, 0]
+            #axis[k, 0]
 
         for k in range(col_r):
             axis[k, 1].plot(x, self.weights_r[:, k])
@@ -249,14 +249,14 @@ class BCMNeuron:
             axis[k, 1].set_title("Time vs Weight")
 
         # plt.legend()
-        plt.show()
+        # plt.show()
 
     def plot_responses(self):
+        plt.figure(1)
         (row_l, col_l) = np.shape(self.tuning_curve_l)
         (row_r, col_r) = np.shape(self.tuning_curve_r)
         x = list(range(0, self.iterations))
         x = self.dt * np.array(x)
-        plt.figure()
         figure, axis = plt.subplots(self.patterns, 2)
 
         for k in range(col_l):
@@ -274,9 +274,10 @@ class BCMNeuron:
             axis[k, 1].set_ylim([-0.2, 3.2])
 
         # plt.legend()
-        plt.show()
+        #plt.show()
 
     def plot_2eyes(self):
+        plt.figure(2)
         (row_l, col_l) = np.shape(self.tuning_curve_l)
         (row_r, col_r) = np.shape(self.tuning_curve_r)
         x = list(range(0, self.iterations))
@@ -293,7 +294,7 @@ class BCMNeuron:
         # axis[k].set_ylim([0, 2])
 
         # axis.legend()
-        plt.show()
+
 
 
 """
@@ -317,8 +318,7 @@ wl, ws, th, tcl, tcr = neuron.train(da_l=pat, da_r=pat, \
                                     ds_l=0 * pat, ds_r=0 * pat, \
                                     ds_li=0 * pati, ds_ri=0 * pati)
 neuron.plot_weights()
-plt.figure()
 neuron.plot_responses()
-plt.figure()
 neuron.plot_2eyes()
+plt.show()
 
