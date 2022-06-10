@@ -13,7 +13,7 @@ from torch.optim.lr_scheduler import StepLR
 import numpy as np
 from scipy.integrate import quad
 import matplotlib.pyplot as plt
-
+# hashtag hashtaggers
 
 class BCMNeuron:
     def __init__(self, lgn_l, lgn_r, patterns, p=2, tau_w=10, tau_theta=1, dt=0.01, eps=0,
