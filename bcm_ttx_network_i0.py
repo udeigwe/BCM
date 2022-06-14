@@ -16,8 +16,8 @@ import matplotlib.pyplot as plt
 
 class BCMNeuron:
     def __init__(self, lgn_l, lgn_r, patterns, p=2, tau_w=10, tau_theta=1, dt=0.01, eps=0,
-                 c0=50, condition='NR', iterations=80000, ttx_in = 0.40, ttx_gone =0.30, tau_ttx=400,
-                 contra_factor =1.5, we=1, wi=0.1):
+                 c0=50, condition='NR', iterations=80000, ttx_in = 0.40, ttx_gone =0.40, tau_ttx=200,
+                 contra_factor =2, we=1, wi=0.3):
         self.lgn_l = lgn_l  # Number of LGN-cortical input fibers from left eye
         self.lgn_r = lgn_r  # Number of LGN-cortical input fibers from right eye
         self.patterns = patterns  # Number of training patterns
@@ -150,9 +150,9 @@ class BCMNeuron:
                    # ttx_factor = 0
                    # print(ttx_factor)
                    # compute BCM neuron activity
-                   ca =  np.sum(self.ml * da_l[k]) + ttx_factor * np.sum(self.mr * da_r[k])
-                   cs =  np.sum(self.ml * ds_l[k]) + ttx_factor * np.sum(self.mr * ds_r[k])
-                   cn =  np.sum(self.ml * nl[k]) + ttx_factor * np.sum(self.mr * nr[k])
+                   ca =  self.contra_factor * np.sum(self.ml * da_l[k]) + ttx_factor * np.sum(self.mr * da_r[k])
+                   cs =  self.contra_factor * np.sum(self.ml * ds_l[k]) + ttx_factor * np.sum(self.mr * ds_r[k])
+                   cn =  self.contra_factor * np.sum(self.ml * nl[k]) + ttx_factor * np.sum(self.mr * nr[k])
                    c = ca - cs + cn 
                    # Feedback loop
                    ci = ci + self.we*c
