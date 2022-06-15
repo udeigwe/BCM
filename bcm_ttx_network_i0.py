@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 
 class BCMNeuron:
     def __init__(self, lgn_l, lgn_r, patterns, p=2, tau_w=10, tau_theta=1, dt=0.01, eps=0,
-                 c0=50, condition='NR', iterations=80000, ttx_in = 0.40, ttx_gone =0.40, tau_ttx=200,
+                 c0=50, condition='NR', iterations=100000, ttx_in = 0.30, ttx_gone =0.50, tau_ttx=300,
                  contra_factor =2, we=1, wi=0.3):
         self.lgn_l = lgn_l  # Number of LGN-cortical input fibers from left eye
         self.lgn_r = lgn_r  # Number of LGN-cortical input fibers from right eye
